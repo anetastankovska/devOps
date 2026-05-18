@@ -1,0 +1,70 @@
+name: Dev CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Start Server with Docker Compose
+        run: docker compose up -d server
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Integration Tests
+        env:
+          TARGET_URL: http://localhost:3030
+        working-directory: ./tests
+        run: npm run test:health
+
+  build-and-push:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Server Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./server
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/backend:dev
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Deploy to Render Dev Environment
+        run: |
+          if [ -n "${{ secrets.RENDER_DEPLOY_HOOK_DEV }}" ]; then
+            curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_DEV }}"
+            echo "Deployment to Render Dev triggered."
+          else
+            echo "RENDER_DEPLOY_HOOK_DEV secret not configured. Skipping deployment."
+          fi
