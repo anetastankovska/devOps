@@ -24,6 +24,7 @@ const fetchStudents = async (url) => {
         Grade: ${person.grade}
       `;
 
+      container.appendChild(div);
     });
 
   console.log(results);
