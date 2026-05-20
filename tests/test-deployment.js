@@ -4,7 +4,7 @@
  * Tests the API endpoints to ensure they respond correctly.
  */
 
-const TARGET_URL = process.env.TARGET_URL || "http://localhost:3031";
+const TARGET_URL = process.env.TARGET_URL || "http://localhost:3030";
 
 async function testEndpoint(name, url, validate, responseType = "json") {
   try {
