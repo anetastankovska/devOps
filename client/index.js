@@ -8,6 +8,7 @@ const API_URL = IS_LOCAL
 const fetchStudents = async (url) => {
   const response = await fetch(url);
   const results = await response.json();
+  console.log(results);
 
   results.forEach(person => {
       const div = document.createElement('div');
@@ -24,7 +25,6 @@ const fetchStudents = async (url) => {
         Grade: ${person.grade}
       `;
 
-      container.appendChild(div);
     });
 
   console.log(results);
