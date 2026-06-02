@@ -1,16 +1,6 @@
 [
   {
     "id": "7ca2298c-6c7c-4816-bded-510cedd50f31",
-    "firstName": "Prod",
-    "lastName": "Env",
-    "age": 25,
-    "gender": "M",
-    "country": "US",
-    "email": "prod.env@gmail.com",
-    "grade": 5
-  },
-  {
-    "id": "7ca2298c-6c7c-4816-bded-510cedd50f31",
     "firstName": "John",
     "lastName": "Doe",
     "age": 25,
@@ -18,6 +8,16 @@
     "country": "US",
     "email": "john.doe@gmail.com",
     "grade": 4
+  },
+  {
+    "id": "7ca2298c-6c7c-4816-bded-510cedd50f31",
+    "firstName": "Prod",
+    "lastName": "Env",
+    "age": 25,
+    "gender": "M",
+    "country": "US",
+    "email": "prod.env@gmail.com",
+    "grade": 5
   },
   {
     "id": "cd32df6f-c181-4584-a2e4-0f7176e2f444",
