@@ -9,7 +9,7 @@ on:
       - develop
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
@@ -55,7 +55,7 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/backend:dev
 
-  deploy:
+  deploy-backend:
     needs: build-and-push
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -68,3 +68,25 @@ jobs:
           else
             echo "RENDER_DEPLOY_HOOK_DEV secret not configured. Skipping deployment."
           fi
+
+  deploy-frontend:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Prepare Dev Build
+        run: |
+          mkdir -p build/dev
+          cp -r client/* build/dev/
+          # Replace placeholder with Dev Backend URL in build/dev/index.js
+          sed -i 's|__BACKEND_URL__|'${{ secrets.RENDER_BACKEND_URL_DEV }}'|g' build/dev/index.js
+
+      - name: Deploy to GitHub Pages (Dev)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          keep_files: true

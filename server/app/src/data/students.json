@@ -21,12 +21,12 @@
   },
   {
     "id": "cd32df6f-c181-4584-a2e4-0f7176e2f444",
-    "firstName": "Jane",
-    "lastName": "Doe",
+    "firstName": "Dev",
+    "lastName": "Env",
     "age": 30,
     "gender": "F",
     "country": "GB",
-    "email": "jane.doe@gmail.com",
+    "email": "dev.env@gmail.com",
     "grade": 3
   },
   {
