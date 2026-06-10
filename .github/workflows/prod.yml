@@ -39,7 +39,7 @@ jobs:
         run: echo "Deployment approved and starting..."
 
   build-and-push:
-    needs: approve-deployment
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -60,7 +60,7 @@ jobs:
           tags: ghcr.io/${{ github.repository_owner }}/backend:prod
 
   deploy-backend:
-    needs: build-and-push
+    needs: approve-deployment
     runs-on: ubuntu-latest
     environment: production
     steps:
