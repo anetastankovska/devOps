@@ -30,8 +30,16 @@ jobs:
         working-directory: ./tests
         run: npm run test:health
 
-  build-and-push:
+  approve-deployment:
     needs: test
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Await Approval
+        run: echo "Deployment approved and starting..."
+
+  build-and-push:
+    needs: approve-deployment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -66,7 +74,7 @@ jobs:
           fi
 
   deploy-frontend:
-    needs: test
+    needs: approve-deployment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
