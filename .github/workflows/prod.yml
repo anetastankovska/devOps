@@ -51,6 +51,13 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/backend:prod
 
+      - name: Build and Push Client Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./client
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/frontend:prod
+
   deploy-backend:
     needs: build-and-push
     runs-on: ubuntu-latest
