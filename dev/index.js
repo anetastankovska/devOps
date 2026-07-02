@@ -3,7 +3,7 @@
 const IS_LOCAL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 const API_URL = IS_LOCAL 
   ? "http://localhost:3030/api/students" 
-  : "";
+  : "https://api.render.com/deploy/srv-d8fivja8qa3s739251o0?key=UaTYuNo4e9I";
 
 const fetchStudents = async (url) => {
   const response = await fetch(url);
