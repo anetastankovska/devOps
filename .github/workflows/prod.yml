@@ -84,7 +84,7 @@ jobs:
           mkdir -p build
           cp -r client/* build/
           # Replace placeholder with Prod Backend URL in build/index.js
-          sed -i 's|__BACKEND_URL__|'${{ secrets.RENDER_BACKEND_URL_PROD }}'|g' build/index.js
+          sed -i 's|__BACKEND_URL__|'${{ secrets.RENDER_DEPLOY_HOOK_PROD }}'|g' build/index.js
 
       - name: Deploy to GitHub Pages (Prod)
         uses: peaceiris/actions-gh-pages@v4
