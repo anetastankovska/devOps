@@ -89,7 +89,7 @@ jobs:
           mkdir -p build/dev
           cp -r client/* build/dev/
           # Replace placeholder with Dev Backend URL in build/dev/index.js
-          sed -i 's|__BACKEND_URL__|'${{ secrets.RENDER_BACKEND_URL_DEV }}'|g' build/dev/index.js
+          sed -i 's|__BACKEND_URL__|'${{ secrets.RENDER_DEPLOY_HOOK_DEV }}'|g' build/dev/index.js
 
       - name: Deploy to GitHub Pages (Dev)
         uses: peaceiris/actions-gh-pages@v4
