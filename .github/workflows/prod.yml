@@ -69,7 +69,6 @@ jobs:
   deploy-backend:
     needs: approve-deployment
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - name: Deploy to Render Production
         run: |
