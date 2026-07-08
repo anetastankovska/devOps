@@ -83,17 +83,6 @@
     "id": "597dae85-9261-4d6d-abec-dcdbae5c60b2",
     "firstName": "Aneta",
     "lastName": "Stankovska",
-    "age": 33,
-    "gender": "F",
-    "country": "MK",
-    "email": "aneta@gmail.com",
-    "grade": 5
-  },
-    {
-    "id": "597dae85-9261-4d6d-abec-dcdbae5c60b2",
-    "firstName": "Aneta",
-    "lastName": "Stankovska",
-    "age": 33,
     "gender": "F",
     "country": "MK",
     "email": "aneta@gmail.com",
